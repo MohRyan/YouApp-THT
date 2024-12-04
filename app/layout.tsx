@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import IndikatorAndroid from '@/components/indikator'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +17,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="relative bg-primary w-[375px] h-[812px] rounded-xl bg-gradient-radial-tr from-gradient-start to-gradient-end">
+          <IndikatorAndroid />
+          <main className='pt-8 px-1 h-full'>
+            {children}
+          </main>
+        </div>
+      </body>
     </html>
   )
 }

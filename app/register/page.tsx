@@ -16,7 +16,6 @@ const Register = () => {
         email: '',
         password: ''
     })
-    console.log("🚀 ~ Register ~ dataRegister:", dataRegister)
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -48,7 +47,7 @@ const Register = () => {
         }
     }
     return (
-        <div className=" py-5 text-white h-full">
+        <div className=" py-5 text-white h-full pt-12 px-1">
             <b className="cursor-pointer  flex items-center gap-3" onClick={() => router.back()}><span className="arrow-back"></span> Back</b>
 
             <div className="flex flex-col gap-10 p-3 h-[90%] justify-center">

@@ -16,6 +16,9 @@ const config: Config = {
         primary: '#09141A',
         'gradient-start': '#1F4247',
         'gradient-end': '#0D1D23',
+
+        secondary: '#162329',
+        third: '#0E191F'
       },
       animation: {
         fadeIn: 'fadeIn 8s ease-out',

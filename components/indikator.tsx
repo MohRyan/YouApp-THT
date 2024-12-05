@@ -33,7 +33,7 @@ const IndikatorAndroid = () => {
     }, [minutes])
 
     return (
-        <div className='absolute top-0 flex justify-between w-full p-2'>
+        <div className='absolute z-30 top-0 flex justify-between w-full p-2'>
             <div className="text-white">
                 <b>{`${hours}:${minutes < 10 ? '0' : ''}${minutes}`}</b>
             </div>

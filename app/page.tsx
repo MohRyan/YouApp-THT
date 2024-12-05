@@ -1,6 +1,14 @@
+'use client'
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter()
+  const token = localStorage.getItem('token')
+
+  if (token) {
+    router.push('/profile')
+  }
   return (
     <div className="flex flex-col w-full h-full justify-center items-center">
       <img src="https://images.glints.com/unsafe/glints-dashboard.oss-ap-southeast-1.aliyuncs.com/company-logo/a0fd564717dec3d243ead58de1bbafb9.jpeg" alt="" className="logo-back scale-75 animate-fadeIn" />

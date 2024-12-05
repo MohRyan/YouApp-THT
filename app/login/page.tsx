@@ -21,7 +21,6 @@ const Login = () => {
         email: '',
         password: ''
     })
-    console.log("🚀 ~ Login ~ dataLogin:", dataLogin)
 
     const isEmail = (input: string) => {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -69,11 +68,12 @@ const Login = () => {
             toastError('Failed to Login!')
         } finally {
             toastSuccess('Successfully Login!')
+            router.push('/profile')
         }
     }
 
     return (
-        <div className=" py-5 text-white h-full">
+        <div className="pt-12 px-1 text-white h-full">
             <b className="cursor-pointer  flex items-center gap-3" onClick={() => router.back()}><span className="arrow-back"></span> Back</b>
 
             <div className="flex flex-col gap-10 p-3 h-[70%] justify-center">
@@ -83,7 +83,7 @@ const Login = () => {
                     <InputWithIcon required={true} name="password" onChange={handleInputChange} styleInput={styleInput} placeholder="Enter Password" />
                     <button type="submit" className="bg-gradient-to-r mt-5 from-[#62CDCB] to-[#4599DB] p-3 rounded-md shadow-lg shadow-cyan-500/50 font-bold text-lg">Login</button>
                 </form>
-                <p className="text-center">No account? <b className="bg-gradient-to-r from-[#94783E] from-10% via-[#F3EDA6] via-30% to-[#94783E] to-90% cursor-pointer underline bg-clip-text text-transparent" onClick={() => router.push('/register')}>Register here</b></p>
+                <p className="text-center">No account? <b className="bg-gradient-to-r from-[#94783E] from-10% via-[#F3EDA6] via-30% to-[#94783E] to-90% cursor-pointer bg-clip-text text-transparent" onClick={() => router.push('/register')}>Register here</b></p>
             </div>
             <Toaster
                 toastOptions={{

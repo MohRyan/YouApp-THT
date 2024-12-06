@@ -24,19 +24,9 @@ export interface dataNoApiI {
 }
 
 const Profile = () => {
-    const [token, setToken] = useState<string | null>(null);
+    const [token, setToken] = useState<string>('');
+    console.log("🚀 ~ Profile ~ token:", token)
     const router = useRouter();
-
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const storedToken = localStorage.getItem('token');
-            if (storedToken) {
-                setToken(storedToken);
-            } else {
-                router.push('/'); // Redirect to login
-            }
-        }
-    }, [router]);
 
     const LogOut = () => {
         if (typeof window !== 'undefined') {
@@ -57,8 +47,9 @@ const Profile = () => {
         weight: undefined,
         interests: []
     });
+    console.log("🚀 ~ Profile ~ userProfile:", userProfile)
 
-    const age = userProfile.birthday ? new Date().getFullYear() - new Date(userProfile.birthday).getFullYear() : 0;
+    const age = userProfile.birthday ? new Date().getFullYear() - new Date(userProfile.birthday!).getFullYear() : 0;
     const [dataNoApi, setDataNoApi] = useState<dataNoApiI>({
         horoscope: '',
         zodiac: '',
@@ -67,7 +58,9 @@ const Profile = () => {
 
 
     const profile = async () => {
-        const profile = await getProfile(token!);
+        const storedToken = localStorage.getItem('token');
+        setToken(storedToken!);
+        const profile = await getProfile(storedToken!);
         setUserProfile(profile.data);
     };
     useEffect(() => {
@@ -85,7 +78,7 @@ const Profile = () => {
             <div className="flex w-full h-full p-3 flex-col space-y-3">
                 <div className={`flex w-full h-48 min-h-48 rounded-xl bg-secondary relative`} style={{ backgroundImage: `url(${image})`, backgroundSize: 'cover' }}>
                     <div className="flex flex-col w-full h-full justify-end items-start p-2 z-10">
-                        <b className="">@{userProfile.username} {age > 0 ? `, ${age}` : ''}</b>
+                        {/* <b className="">@{userProfile.username} {age > 0 ? `, ${age}` : ''}</b> */}
                         {dataNoApi.gender &&
                             <b>{dataNoApi.gender}</b>
                         }
@@ -110,7 +103,7 @@ const Profile = () => {
                         userProfile.name && !aboutToggle ?
                             <div className="flex flex-col gap-3">
                                 <span className="text-gray-400 text-sm flex gap-2">Name: <p className="text-white">{userProfile.name}</p></span>
-                                <span className="text-gray-400 text-sm flex gap-2">Birthday: <p className="text-white">{userProfile.birthday} {`( Age ${age || '-'})`}</p></span>
+                                <span className="text-gray-400 text-sm flex gap-2">Birthday: <p className="text-white">{userProfile.birthday ? `${userProfile.birthday} (Age ${age || '-'})` : 'Not available'}</p></span>
                                 <span className="text-gray-400 text-sm flex gap-2">Horoscope: <p className="text-white">{dataNoApi.horoscope}</p></span>
                                 <span className="text-gray-400 text-sm flex gap-2">Zodiac: <p className="text-white">{dataNoApi.zodiac}</p></span>
                                 <span className="text-gray-400 text-sm flex gap-2">Height: <p className="text-white">{userProfile.height}</p></span>

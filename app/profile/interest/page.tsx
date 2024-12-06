@@ -9,7 +9,10 @@ import { Toaster } from 'react-hot-toast'
 const Interest = () => {
     const router = useRouter()
     const [tags, setTags] = useState<string[]>([]);
-    const token = localStorage.getItem('token')
+    const [token, setToken] = useState<string | null>(null)
+    useEffect(() => {
+        setToken(localStorage.getItem('token'))
+    }, [])
 
 
 

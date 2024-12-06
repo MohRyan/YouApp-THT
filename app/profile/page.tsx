@@ -1,39 +1,52 @@
-'use client'
-import FormProfile from "@/app/profile/formProfile"
-import { getProfile } from "@/lib/api"
-import { listHoroskop } from "@/lib/horoskop"
-import { listZodiac } from "@/lib/zodiac"
-import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+'use client';
+import FormProfile from "@/app/profile/formProfile";
+import { getProfile } from "@/lib/api";
+import { listHoroskop } from "@/lib/horoskop";
+import { listZodiac } from "@/lib/zodiac";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export interface userProfileI {
-    email?: string
-    username?: string
-    name?: string
-    birthday?: string
-    horoscope?: string
-    height?: number
-    weight?: number
-    interests?: string[]
+    email?: string;
+    username?: string;
+    name?: string;
+    birthday?: string;
+    horoscope?: string;
+    height?: number;
+    weight?: number;
+    interests?: string[];
 }
+
 export interface dataNoApiI {
-    horoscope: string
-    zodiac: string
-    gender: string
+    horoscope: string;
+    zodiac: string;
+    gender: string;
 }
 
 const Profile = () => {
-    const router = useRouter()
-    if (!localStorage.getItem('token')) {
-        router.push('/')
-    }
+    const [token, setToken] = useState<string | null>(null);
+    const router = useRouter();
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const storedToken = localStorage.getItem('token');
+            if (storedToken) {
+                setToken(storedToken);
+            } else {
+                router.push('/'); // Redirect to login
+            }
+        }
+    }, [router]);
+
     const LogOut = () => {
-        localStorage.removeItem('token')
-        router.push('/')
-    }
-    const [image, setImage] = useState('')
-    const [aboutToggle, setAboutToggle] = useState<boolean>(false)
-    console.log("🚀 ~ Profile ~ aboutToggle:", aboutToggle)
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem('token'); // Hapus token dari localStorage
+            router.push('/'); // Redirect ke halaman home
+        }
+    };
+
+    const [image, setImage] = useState('');
+    const [aboutToggle, setAboutToggle] = useState<boolean>(false);
     const [userProfile, setUserProfile] = useState<userProfileI>({
         email: '',
         username: '',
@@ -43,26 +56,23 @@ const Profile = () => {
         height: undefined,
         weight: undefined,
         interests: []
-    })
-    const age = new Date().getFullYear() - new Date(userProfile.birthday!).getFullYear()
+    });
+
+    const age = userProfile.birthday ? new Date().getFullYear() - new Date(userProfile.birthday).getFullYear() : 0;
     const [dataNoApi, setDataNoApi] = useState<dataNoApiI>({
         horoscope: '',
         zodiac: '',
         gender: '',
-    })
+    });
 
     const profile = async () => {
-        const profile = await getProfile()
-        setUserProfile(profile.data)
-    }
+        const profile = await getProfile(token!);
+        setUserProfile(profile.data);
+    };
+
     useEffect(() => {
-        profile()
-    }, [])
-
-
-
-
-
+        profile();
+    }, []);
 
     return (
         <div className="text-white pt-12 px-1 example bg-primary h-full w-full space-y-3 rounded-xl overflow-y-auto">
@@ -75,7 +85,7 @@ const Profile = () => {
             <div className="flex w-full h-full p-3 flex-col space-y-3">
                 <div className={`flex w-full h-48 min-h-48 rounded-xl bg-secondary relative`} style={{ backgroundImage: `url(${image})`, backgroundSize: 'cover' }}>
                     <div className="flex flex-col w-full h-full justify-end items-start p-2 z-10">
-                        <b className="">@{userProfile.username} {Number.isNaN(age) ? '' : `, ${age}`}</b>
+                        <b className="">@{userProfile.username} {age > 0 ? `, ${age}` : ''}</b>
                         {dataNoApi.gender &&
                             <b>{dataNoApi.gender}</b>
                         }
@@ -93,15 +103,14 @@ const Profile = () => {
                         <b>About</b>
                         {!aboutToggle ?
                             <b onClick={() => setAboutToggle(true)} className="edit-filled cursor-pointer"></b>
-                            :
-                            ""
+                            : ""
                         }
                     </div>
                     {
                         userProfile.name && !aboutToggle ?
                             <div className="flex flex-col gap-3">
                                 <span className="text-gray-400 text-sm flex gap-2">Name: <p className="text-white">{userProfile.name}</p></span>
-                                <span className="text-gray-400 text-sm flex gap-2">Birthday: <p className="text-white">{userProfile.birthday} {`( Age ${Number.isNaN(age) ? '-' : `${age}`} )`}</p></span>
+                                <span className="text-gray-400 text-sm flex gap-2">Birthday: <p className="text-white">{userProfile.birthday} {`( Age ${age || '-'})`}</p></span>
                                 <span className="text-gray-400 text-sm flex gap-2">Horoscope: <p className="text-white">{dataNoApi.horoscope}</p></span>
                                 <span className="text-gray-400 text-sm flex gap-2">Zodiac: <p className="text-white">{dataNoApi.zodiac}</p></span>
                                 <span className="text-gray-400 text-sm flex gap-2">Height: <p className="text-white">{userProfile.height}</p></span>
@@ -133,9 +142,8 @@ const Profile = () => {
                     }
                 </div>
             </div>
-
         </div>
-    )
-}
+    );
+};
 
-export default Profile
+export default Profile;

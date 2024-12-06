@@ -1,7 +1,7 @@
 'use client'
 import { Input, InputWithIcon } from "@/components/input"
 import { useRouter } from "next/navigation"
-import { dataLoginProps, styleInput } from "../login/page"
+import { dataLoginProps } from "../login/page"
 import { FormEvent, useEffect, useState } from "react"
 import toast, { Toaster } from 'react-hot-toast';
 import { toastError, toastSuccess } from "@/components/toast"
@@ -53,10 +53,10 @@ const Register = () => {
             <div className="flex flex-col gap-10 p-3 h-[90%] justify-center">
                 <b className="text-3xl">Register</b>
                 <form className="flex flex-col gap-6 " onSubmit={handleSubmitRegister}>
-                    <Input styleInput={styleInput} name={'email'} placeholder="Enter Email" required={true} onChange={handleInputChange} />
-                    <Input styleInput={styleInput} required={true} name={'username'} placeholder="Create Username" onChange={handleInputChange} />
-                    <InputWithIcon name="password" required={true} onChange={handleInputChange} styleInput={styleInput} placeholder="Create Password" />
-                    <InputWithIcon required={true} name="confirmPassword" onChange={(e) => setConfirmPassword(e.target.value)} styleInput={styleInput} placeholder="Confirm Password" />
+                    <Input name={'email'} placeholder="Enter Email" required={true} onChange={handleInputChange} />
+                    <Input required={true} name={'username'} placeholder="Create Username" onChange={handleInputChange} />
+                    <InputWithIcon name="password" required={true} onChange={handleInputChange} placeholder="Create Password" />
+                    <InputWithIcon required={true} name="confirmPassword" onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm Password" />
                     <span>{(confirmPassword && dataRegister.password) === "" ?
                         ""
                         : confirmPassword === dataRegister.password ?

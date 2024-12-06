@@ -6,30 +6,25 @@ const IndikatorAndroid = () => {
     const [minutes, setMinutes] = useState<number>(new Date().getMinutes())
     const [batteryLevel, setBatteryLevel] = useState<boolean>(false)
 
-
     useEffect(() => {
         const updateTime = () => {
-            const currentTime = new Date();
-            setHours(currentTime.getHours());
-            setMinutes(currentTime.getMinutes());
-
-
-        };
+            const currentTime = new Date()
+            setHours(currentTime.getHours())
+            setMinutes(currentTime.getMinutes())
+        }
 
         // Update time immediately on mount
         updateTime()
 
-        // Set interval to update time every second
-        const intervalId = setInterval(updateTime, 10000);
-        // Set interval to update battery every 5 seconds (or any other interval you prefer)
-
+        // Set interval to update time every 10 seconds
+        const intervalId = setInterval(updateTime, 10000)
 
         // Cleanup interval on component unmount
-        return () => clearInterval(intervalId);
-    }, [])
+        return () => clearInterval(intervalId)
+    }, []) // Hapus 'batteryLevel' dari array dependensi
 
     useEffect(() => {
-        setBatteryLevel(!batteryLevel)
+        setBatteryLevel((prevBatteryLevel) => !prevBatteryLevel)
     }, [minutes])
 
     return (

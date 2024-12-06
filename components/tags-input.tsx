@@ -21,9 +21,10 @@ const TagsInput = ({ tags, setTags }: TagsInputProps) => {
 
     // Fetch profile data and initialize tags
     useEffect(() => {
+        const token = localStorage.getItem("token");
         const fetchProfile = async () => {
             try {
-                const profile = await getProfile();
+                const profile = await getProfile(token!);
                 setUserProfile(profile.data);
 
                 // Initialize tags with interests from profile

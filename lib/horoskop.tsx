@@ -68,54 +68,54 @@ interface HoroskopI {
 export const listHoroskop: HoroskopI[] = [
     {
         title: 'Aries',
-        icon: <Aries size={48} />
+        icon: <Aries size={20} />
     },
     {
         title: 'Taurus',
-        icon: <Taurus size={48} />
+        icon: <Taurus size={20} />
     },
     {
         title: 'Gemini',
-        icon: <Gemini size={48} />
+        icon: <Gemini size={20} />
     },
     {
         title: 'Cancer',
-        icon: <Cancer size={48} />
+        icon: <Cancer size={20} />
     },
     {
         title: 'Cancer',
-        icon: <Cancer size={48} />
+        icon: <Cancer size={20} />
     },
     {
         title: 'Leo',
-        icon: <Leo size={48} />
+        icon: <Leo size={20} />
     },
     {
         title: 'Virgo',
-        icon: <Virgo size={48} />
+        icon: <Virgo size={20} />
     },
     {
         title: 'Libra',
-        icon: <Libra size={48} />
+        icon: <Libra size={20} />
     },
     {
         title: 'Scorpio',
-        icon: <Scorpio size={48} />
+        icon: <Scorpio size={20} />
     },
     {
         title: 'Sagittarius',
-        icon: <Sagittarius size={48} />
+        icon: <Sagittarius size={20} />
     },
     {
         title: 'Capricorn',
-        icon: <Capricorn size={48} />
+        icon: <Capricorn size={20} />
     },
     {
         title: 'Aquarius',
-        icon: <Aquarius size={48} />
+        icon: <Aquarius size={20} />
     },
     {
         title: 'Pisces',
-        icon: <Pisces size={48} />
+        icon: <Pisces size={20} />
     },
 ]

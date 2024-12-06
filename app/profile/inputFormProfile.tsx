@@ -7,13 +7,14 @@ interface InputFormProps {
     name: string
     required?: boolean
     children?: React.ReactNode
+    value?: string
 }
 
-export const InputFormProfile = ({ styleInput, placeholder, onChangeInput, name, required = false, title }: InputFormProps) => {
+export const InputFormProfile = ({ value, styleInput, placeholder, onChangeInput, name, required = false, title }: InputFormProps) => {
     return (
         <div className="flex w-full gap-4 items-center">
             <span className="text-gray-400 text-sm w-[50%]">{title}</span>
-            <input className={styleInput} name={name} type="text" placeholder={placeholder} required={required} onChange={onChangeInput} />
+            <input className={styleInput} name={name} value={value} type="text" placeholder={placeholder} required={required} onChange={onChangeInput} />
         </div>
     )
 }

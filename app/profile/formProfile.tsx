@@ -117,7 +117,7 @@ const FormProfile = ({ token, setImage, image, aboutToggle, userProfile, setAbou
                 <InputFormProfile styleInput={styleInputProfile} placeholder="Add weight" onChangeInput={handleInputChangeProfile} name="weight" required title="Weight:" value={userApiPut.weight?.toString() ? userApiPut.weight?.toString() : ''} />
             </div>
             <div className="flex justify-end">
-                <button className='bg-gradient-to-r from-gradient-start via-secondary to-gradient-start text-white py-2 w-1/2 rounded-md'>Batal</button>
+                <button className='bg-gradient-to-r from-gradient-start via-secondary to-gradient-start text-white py-2 w-1/2 rounded-md' type='button' onClick={() => setAboutToggle(false)}>Batal</button>
             </div>
         </form>
     )

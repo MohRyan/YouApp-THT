@@ -25,7 +25,6 @@ export interface dataNoApiI {
 
 const Profile = () => {
     const [token, setToken] = useState<string>('');
-    console.log("🚀 ~ Profile ~ token:", token)
     const router = useRouter();
 
     const LogOut = () => {
@@ -47,7 +46,6 @@ const Profile = () => {
         weight: undefined,
         interests: []
     });
-    console.log("🚀 ~ Profile ~ userProfile:", userProfile)
 
     const age = userProfile.birthday ? new Date().getFullYear() - new Date(userProfile.birthday!).getFullYear() : 0;
     const [dataNoApi, setDataNoApi] = useState<dataNoApiI>({
@@ -78,7 +76,7 @@ const Profile = () => {
             <div className="flex w-full h-full p-3 flex-col space-y-3">
                 <div className={`flex w-full h-48 min-h-48 rounded-xl bg-secondary relative`} style={{ backgroundImage: `url(${image})`, backgroundSize: 'cover' }}>
                     <div className="flex flex-col w-full h-full justify-end items-start p-2 z-10">
-                        {/* <b className="">@{userProfile.username} {age > 0 ? `, ${age}` : ''}</b> */}
+                        <b className="">@{userProfile.username} {age > 0 ? `, ${age}` : ''}</b>
                         {dataNoApi.gender &&
                             <b>{dataNoApi.gender}</b>
                         }

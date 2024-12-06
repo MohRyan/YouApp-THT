@@ -14,14 +14,14 @@ interface formProfileProps {
     setDataNoApi: React.Dispatch<React.SetStateAction<dataNoApiI>>
     profile: () => void
     userProfile: userProfileI
+    token: string | null
 }
 
 const textGradient = 'font-serif bg-gradient-to-r from-[#94783E] from-10% via-[#F3EDA6] via-30% to-[#94783E] to-90% cursor-pointer bg-clip-text text-transparent'
 const styleInputProfile = "w-full p-2 rounded-md bg-secondary border border-gray-400 text-right "
 
 
-const FormProfile = ({ setImage, image, aboutToggle, userProfile, setAboutToggle, setDataNoApi, profile }: formProfileProps) => {
-    const token = localStorage.getItem('token')
+const FormProfile = ({ token, setImage, image, aboutToggle, userProfile, setAboutToggle, setDataNoApi, profile }: formProfileProps) => {
     const [dataNoApiDummy, setDataNoApiDummy] = useState<dataNoApiI>({
         horoscope: '',
         zodiac: '',

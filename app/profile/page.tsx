@@ -65,11 +65,11 @@ const Profile = () => {
         gender: '',
     });
 
+
     const profile = async () => {
         const profile = await getProfile(token!);
         setUserProfile(profile.data);
     };
-
     useEffect(() => {
         profile();
     }, []);
@@ -120,7 +120,7 @@ const Profile = () => {
                             <p className={`${aboutToggle ? 'hidden' : 'block'} pt-7`}>Add in your to help others know you better</p>
                     }
                     <div className={`${aboutToggle ? 'block' : 'hidden'}`}>
-                        <FormProfile setImage={setImage} image={image} aboutToggle={aboutToggle} setAboutToggle={setAboutToggle} setDataNoApi={setDataNoApi} profile={profile} userProfile={userProfile} />
+                        <FormProfile setImage={setImage} image={image} aboutToggle={aboutToggle} setAboutToggle={setAboutToggle} setDataNoApi={setDataNoApi} profile={profile} userProfile={userProfile} token={token} />
                     </div>
                 </div>
                 <div className="flex w-full flex-col justify-between p-4 min-h-32 rounded-xl bg-third">
